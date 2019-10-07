@@ -1,3 +1,4 @@
+/* Создание временных таблиц*/
 CREATE TABLE #Table1
 (
      
@@ -49,9 +50,11 @@ insert into #Table3 values  (316,'Каско А юридических лиц','
 insert into #Table3 values  (302,'Защита от ДТП - ФЛ','2019-07-05', '2020-09-02')
 insert into #Table3 values  (303,'Ничего лишнего','2019-08-04',  '2020-09-02')
 
+/* Проверка корректности добавления данных в таблицу*/
 select * from 
 #Table1, #Table2, #Table3
 
+/* Выполнение запрос*/
 select 
 t1.calculationDate as 'дата расчета',
 t2.printdate as 'дата печати',
@@ -70,6 +73,12 @@ printdate > '2019-07-01'
 and printdate < '2019-10-01'
 and t1.calculationDate != t2.printdate
 and t3.DateStart < t3.DateEnd
+
+/* Удалание временных таблиц*/
+IF OBJECT_ID('tempdb..#Prod') IS NOT NULL
+BEGIN
+    DROP TABLE #Prod
+END
 
 
 
