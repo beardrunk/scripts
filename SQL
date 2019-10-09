@@ -1,75 +1,107 @@
-CREATE TABLE #Table1
+CREATE TABLE #KascoKont
 (
      
-	 [contractId]			 uniqueidentifier NOT NULL
-,    [calculationDate]       DATETIME NOT NULL
+     [contractId]			uniqueidentifier NOT NULL
+,    [calculationDate]      DATETIME NOT NULL
 ,    [productId]            NVARCHAR(128) NOT NULL
 ,	 [Isprecalculate]       NVARCHAR(128)
-Primary key (contractId)
+Primary key (contractId, productId)
 )
-insert into #Table1 values  ('8DB8E9FF-86D0-480F-B0D9-258E69A4FD11','2019-09-02', 301, 1)
-insert into #Table1 values  ('F4E30B62-7A80-42BC-BE2B-26CFC23BED65','2019-08-01', 307, 1)
-insert into #Table1 values  ('E47CB5E2-F5B3-4036-9FA4-258EB8F176AB','2019-07-03', 316, 0)
-insert into #Table1 values  ('6793C514-C8AC-42EC-8DD3-258EEC7436E2','2019-07-05', 302, 1)
-insert into #Table1 values  ('F534A17D-2C98-42B6-A032-258F6841B661','2019-08-04', 303, 0)
 
-select * from #Table1
+insert into #KascoKont values  ('8DB8E9FF-86D0-480F-B0D9-258E69A4FD11','2019-09-03 13:03:36.827', 301, 1)
+insert into #KascoKont values  ('F4E30B62-7A80-42BC-BE2B-26CFC23BED65','2019-09-04 08:03:33.233', 307, 1)
+insert into #KascoKont values  ('E47CB5E2-F5B3-4036-9FA4-258EB8F176AB','2019-08-04 00:00:00.000', 301, 0)
+insert into #KascoKont values  ('6793C514-C8AC-42EC-8DD3-258EEC7436E2','2019-07-03 08:07:15.000', 301, 1)
+insert into #KascoKont values  ('F534A17D-2C98-42B6-A032-258F6841B661','2019-08-03 00:00:00.000', 301, 0)
+insert into #KascoKont values  ('D18979CA-8995-4CB2-A622-26CFCF958687','2019-08-04 00:00:00.000', 301, 0)
 
+select * from #KascoKont
 
-
-CREATE TABLE #Table2
+CREATE TABLE #KascoPrint
 (
      [id]					NVARCHAR not null
-,	 [contractId]			 uniqueidentifier NOT NULL
+,	 [contractId]			uniqueidentifier NOT NULL
 ,    [printdate]            DATETIME NOT NULL
-,    [IsDraft]            NVARCHAR(128) NOT NULL
-Primary key (contractId)
+,    [IsDraft]              NVARCHAR(128) NOT NULL
+Primary key (id)
 )
 
-insert into #Table2 values  (1,'8DB8E9FF-86D0-480F-B0D9-258E69A4FD11','2019-09-02',  1)
-insert into #Table2 values  (2,'F4E30B62-7A80-42BC-BE2B-26CFC23BED65','2019-08-01',  1)
-insert into #Table2 values  (3,'E47CB5E2-F5B3-4036-9FA4-258EB8F176AB','2019-07-03',  0)
-insert into #Table2 values  (4,'6793C514-C8AC-42EC-8DD3-258EEC7436E2','2019-07-05',  1)
-insert into #Table2 values  (5,'F534A17D-2C98-42B6-A032-258F6841B661','2019-08-04',  0)
+insert into #KascoPrint values  (1,'5C6FB33F-0A08-4354-B1D8-1FEE2D3F66E0','2019-09-03 01:21:46.893',  1)
+insert into #KascoPrint values  (2,'5C6FB33F-0A08-4354-B1D8-1FEE2D3F66E0','2019-09-03 01:22:50.520',  1)
+insert into #KascoPrint values  (3,'C902DAA8-C246-44E8-8BE0-86E7B7B8DEFC','2019-09-03 02:26:27.607',  0)
+insert into #KascoPrint values  (4,'CC97B061-E9B5-495C-9C8E-30DB55A41DE8','2019-09-03 03:13:17.440',  1)
+insert into #KascoPrint values  (5,'CC97B061-E9B5-495C-9C8E-30DB55A41DE8','2019-09-03 03:13:20.853',  0)
+insert into #KascoPrint values  (6,'CC97B061-E9B5-495C-9C8E-30DB55A41DE8','2019-09-03 03:13:23.373',  1)
+insert into #KascoPrint values  (7,'CC97B061-E9B5-495C-9C8E-30DB55A41DE8','2019-09-03 03:15:42.037',  1)
+insert into #KascoPrint values  (8,'CC97B061-E9B5-495C-9C8E-30DB55A41DE8','2019-09-03 03:19:35.627',  0)
 
-select * from #Table2
+select * from #KascoPrint
 
-CREATE TABLE #Table3
+
+CREATE TABLE #Product
 (
-	[productid]  INT not null,
-	[ProductName] NVARCHAR(255) not null,
-	[DateStart]  DATETIME not null,
-	[DateEnd]    DATETIME not null
+	[productid]	   INT not null,
+	[ProductName]  NVARCHAR(255) not null,
+	[DateStart]    DATETIME not null,
+	[DateEnd]      DATETIME not null
 Primary key (productid)
 ) 
 
-insert into #Table3 values  (301,'Бизнес-Лизинг','2019-09-02',  '2020-09-02')
-insert into #Table3 values  (307,'АвтоЗащита Вариант А','2019-08-01',  '2020-09-02')
-insert into #Table3 values  (316,'Каско А юридических лиц','2019-07-03', '2020-09-02')
-insert into #Table3 values  (302,'Защита от ДТП - ФЛ','2019-07-05', '2020-09-02')
-insert into #Table3 values  (303,'Ничего лишнего','2019-08-04',  '2020-09-02')
+insert into #Product values  (315,'Бизнес-Лизинг','2009-10-07 06:14:59.817',  '2020-12-23 11:25:37.257')
+insert into #Product values  (301,'АвтоЗащита Вариант А','2002-12-07 01:51:48.067',  '2022-06-06 17:02:23.473')
+insert into #Product values  (304,'Каско А юридических лиц','2006-07-18 11:49:24.130', '2037-12-18 20:27:18.797')
+insert into #Product values  (307,'Защита от ДТП - ФЛ','2002-08-01 14:40:47.843', '2018-12-18 13:42:17.917')
+insert into #Product values  (313,'Ничего лишнего','2018-02-14 14:30:28.580',  '2039-04-06 12:10:58.710')
+
 
 select * from 
-#Table1, #Table2, #Table3
+#Product
+where GETDATE() > DateStart
+and GETDATE() < DateEnd
 
-select 
-t1.calculationDate as 'дата расчета',
-t2.printdate as 'дата печати',
-t1.contractId as 'номер договора',
-t3.ProductName as 'имя продукта',
-t3..productid as 'Идентификатор продукта',
-t2.IsDraft,
-t3.datestart,
-t3.dateend
-from #Table3 pr, #Table1 t1
-join #Table2 t2 on t2.contractId = t1.contractId
-join #Table3 t3 on t1.productId = t3.productid
+select GETDATE()
 
-where 
-printdate > '2019-07-01'
-and printdate < '2019-10-01'
-and t1.calculationDate != t2.printdate
-and t3.DateStart < t3.DateEnd
-
+/*declare 
+@startdate datetime = '2019-07-01 13:03:36.827',
+@enddate datetime = '2019-10-01 13:03:36.827'*/
+SELECT 
+kk.contractId as'Номер договора',
+pr.ProductName as 'Название продукта',
+kk.calculationDate as 'Дата расчета',
+kp.printdate as 'Дата печати'
+from #KascoPrint  kp, #Product pr
+join #KascoKont kk on kk.productId = pr.productid
+join #KascoPrint kpr on kpr.printdate != kk.calculationDate
+where  
+calculationDate BETWEEN '2019-07-01' AND GETDATE()
+and GETDATE() > pr.DateStart
+and GETDATE() < pr.DateEnd
 
 
+SELECT * FROM #KascoKont WHERE calculationDate BETWEEN '2019-07-01' and GETDATE()
+
+
+
+
+
+
+SELECT SYSDATETIME()  
+    ,SYSDATETIMEOFFSET()  
+    ,SYSUTCDATETIME()  
+    ,CURRENT_TIMESTAMP  
+    ,GETDATE()  
+    ,GETUTCDATE();  
+
+
+
+
+
+
+
+
+
+
+IF OBJECT_ID('tempdb..#KaskoPr') IS NOT NULL
+BEGIN
+    DROP TABLE #KaskoPr
+END
